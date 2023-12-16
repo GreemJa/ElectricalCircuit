@@ -31,5 +31,10 @@ namespace CodeBase.UI.Services.Factory
             WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
             window.Construct(_progressService);
         }
+
+        public void CreateInProgress()
+        {
+            
+        }
     }
 }

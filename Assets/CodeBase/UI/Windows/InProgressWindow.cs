@@ -1,11 +1,13 @@
+using UnityEngine.UI;
+
 namespace CodeBase.UI.Windows
 {
-    public sealed class MenuWindow : WindowBase
+    public sealed class InProgressWindow : WindowBase
     {
-        protected override void OnAwake()
-        {
-            
-        }
+        public Button CloseButton;
+        
+        protected override void OnAwake() => 
+            CloseButton.onClick.AddListener(()=>Destroy(gameObject));
 
         protected override void Initialize()
         {

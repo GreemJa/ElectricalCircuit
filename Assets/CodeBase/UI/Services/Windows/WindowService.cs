@@ -17,9 +17,12 @@ namespace CodeBase.UI.Services.Windows
             {
                 case WindowId.Unknown:
                     break;
-                /*case WindowId.Shop:
-                    _uiFactory.CreateShop();
-                    break;*/
+                case WindowId.Menu:
+                    _uiFactory.CreateMenu();
+                    break;
+                case WindowId.InProgress:
+                    _uiFactory.CreateInProgress();
+                    break;
             }
         }
     }
