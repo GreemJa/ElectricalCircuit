@@ -1,5 +1,6 @@
 using CodeBase.Logic;
 using CodeBase.UI.Services.Factory;
+using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -9,13 +10,15 @@ namespace CodeBase.Infrastructure.States
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _loadingCurtain;
         private readonly IUIFactory _uiFactory;
+        private readonly IWindowService _windowService;
 
-        public LoadMenuState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IUIFactory uiFactory)
+        public LoadMenuState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IUIFactory uiFactory, IWindowService windowService)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _loadingCurtain = loadingCurtain;
             _uiFactory = uiFactory;
+            _windowService = windowService;
         }
 
         public void Enter(string sceneName)
@@ -37,7 +40,7 @@ namespace CodeBase.Infrastructure.States
         private void InitMenu()
         {
             _uiFactory.CreateUIRoot();
-            _uiFactory.CreateMenu();
+            _uiFactory.CreateMenu(_windowService);
         }
     }
 }

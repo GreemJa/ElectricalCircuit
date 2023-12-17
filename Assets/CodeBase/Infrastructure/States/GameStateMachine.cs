@@ -4,7 +4,9 @@ using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Logic;
+using CodeBase.StaticData;
 using CodeBase.UI.Services.Factory;
+using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -19,8 +21,8 @@ namespace CodeBase.Infrastructure.States
       {
         [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
         [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>(), services.Single<ISaveLoadProgressService>()),
-        [typeof(LoadMenuState)] = new LoadMenuState(this, sceneLoader, loadingCurtain, services.Single<IUIFactory>()), 
-        [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IUIFactory>()),
+        [typeof(LoadMenuState)] = new LoadMenuState(this, sceneLoader, loadingCurtain, services.Single<IUIFactory>(), services.Single<IWindowService>()), 
+        [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IUIFactory>(), services.Single<IStaticDataService>()),
         [typeof(GameLoopState)] = new GameLoopState(this),
       };
     }

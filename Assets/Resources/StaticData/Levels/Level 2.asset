@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b80cb4d620240a68ae9895ac40d4ed6, type: 3}
+  m_Name: Level 2
+  m_EditorClassIdentifier: 
+  LevelKey: Level 2
+  EnemySpawners:
+  - DeviceTypeId: 2
+    DeviceState: 0
+    Transform: {fileID: 0}
+  - DeviceTypeId: 0
+    DeviceState: 1
+    Transform: {fileID: 0}
+  - DeviceTypeId: 1
+    DeviceState: 1
+    Transform: {fileID: 0}
+  ContentSprite: {fileID: 21300000, guid: 2b77423211eb9004ea4461d4520f0067, type: 3}

@@ -18,7 +18,7 @@ namespace CodeBase.UI.Services.Windows
                 case WindowId.Unknown:
                     break;
                 case WindowId.Menu:
-                    _uiFactory.CreateMenu();
+                    _uiFactory.CreateMenu(this);
                     break;
                 case WindowId.InProgress:
                     _uiFactory.CreateInProgress();
