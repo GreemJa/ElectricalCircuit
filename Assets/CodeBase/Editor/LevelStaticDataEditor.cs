@@ -6,6 +6,7 @@ using CodeBase.Logic;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Device;
 using CodeBase.StaticData.Levels;
+using CodeBase.UI.Elements;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -28,7 +29,7 @@ namespace CodeBase.Editor
                 levelData.LevelKey = SceneManager.GetActiveScene().name;
                 
                 levelData.EnemySpawners = FindObjectsOfType<DeviceSpawner>()
-                    .Select(x => new DeviceSpawnerData(x.DeviceTypeId, x.DeviceState, x.transform.position, x.transform.rotation.ToVector4()))
+                    .Select(x => new DeviceSpawnerData(x.DeviceTypeId, x.DeviceState, x.transform.AsTransformData()))
                     .ToList();
                 
                 levelData.ContentSprite = Resources.Load<Sprite>(AssetPath.ContentSprites+$"/{levelData.LevelKey}");
