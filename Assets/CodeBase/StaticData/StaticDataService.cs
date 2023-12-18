@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using CodeBase.StaticData.Device;
 using CodeBase.StaticData.Levels;
 using CodeBase.StaticData.Windows;
 using CodeBase.UI.Services.Windows;
@@ -11,9 +12,11 @@ namespace CodeBase.StaticData
     {
         private const string WindowsStaticDataPath = "StaticData/UI/WindowStaticData";
         private const string LevelsStaticDataPath = "StaticData/Levels";
+        private const string DeviceStaticDataPath = "StaticData/Device/DeviceData";
 
         private Dictionary<WindowId, WindowConfig> _windowConfigs;
         private Dictionary<string, LevelStaticData> _levels;
+        private Dictionary<DeviceTypeId, DeviceConfig> _deviceConfigs;
 
         public void LoadStaticData()
         {
@@ -24,6 +27,10 @@ namespace CodeBase.StaticData
             _levels = Resources
                 .LoadAll<LevelStaticData>(LevelsStaticDataPath)
                 .ToDictionary(x => x.LevelKey, x => x);
+
+            _deviceConfigs = Resources.Load<DeviceStaticData>(DeviceStaticDataPath)
+                .Configs
+                .ToDictionary(x => x.TypeId, x => x);
         }
 
         public WindowConfig ForWindow(WindowId windowId) =>
@@ -34,6 +41,11 @@ namespace CodeBase.StaticData
         public LevelStaticData ForLevel(string sceneKey) =>
             _levels.TryGetValue(sceneKey, out LevelStaticData staticData)
                 ? staticData
+                : null;
+
+        public DeviceConfig ForDevice(DeviceTypeId deviceType) =>
+            _deviceConfigs.TryGetValue(deviceType, out DeviceConfig deviceConfig)
+                ? deviceConfig
                 : null;
     }
 }

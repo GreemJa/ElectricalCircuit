@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.Data;
 using UnityEngine;
 
 namespace CodeBase.StaticData.Device
@@ -8,15 +9,13 @@ namespace CodeBase.StaticData.Device
     {
         public DeviceTypeId DeviceTypeId;
         public DeviceState DeviceState;
-        public Vector3 Position;
-        public Vector4 Rotation;
+        public TransformData TransformData;
 
-        public DeviceSpawnerData(DeviceTypeId deviceTypeId, DeviceState deviceState, Vector3 position, Vector4 rotation)
+        public DeviceSpawnerData(DeviceTypeId deviceTypeId, DeviceState deviceState, TransformData transformData)
         {
             DeviceTypeId = deviceTypeId;
             DeviceState = deviceState;
-            Position = position;
-            Rotation = rotation;
+            TransformData = transformData;
         }
     }
 }

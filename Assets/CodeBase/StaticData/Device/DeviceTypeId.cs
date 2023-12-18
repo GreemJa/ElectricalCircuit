@@ -8,6 +8,9 @@
         LEDLeft,
         LEDRight,
         Switch,
-        BatteryPlus
+        BatteryPlus,
+        LampHighBrightness,
+        LampMidBrightness,
+        LampLowBrightness
     }
 }
