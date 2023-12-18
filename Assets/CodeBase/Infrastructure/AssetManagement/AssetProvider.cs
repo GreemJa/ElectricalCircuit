@@ -1,3 +1,4 @@
+using CodeBase.Data;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.AssetManagement
@@ -10,10 +11,13 @@ namespace CodeBase.Infrastructure.AssetManagement
       return Object.Instantiate(prefab, at, Quaternion.identity);
     }
 
-    public GameObject Instantiate(string path, Transform at)
+    public GameObject Instantiate(string path, TransformData at, Transform parent)
     {
       var prefab = Resources.Load<GameObject>(path);
-      return Object.Instantiate(prefab, at.position, new Quaternion());
+      GameObject gameObject = Object.Instantiate(prefab, at.Position.AsUnityVector(), at.Rotation.AsUnityQuaternion(),parent);
+      gameObject.transform.localScale = at.LocalScale.AsUnityVector();
+
+      return gameObject;
     }
 
     public GameObject Instantiate(string path)

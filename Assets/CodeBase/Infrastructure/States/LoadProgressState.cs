@@ -40,7 +40,7 @@ namespace CodeBase.Infrastructure.States
         private PlayerProgress NewProgress()
         {
             PlayerProgress playerProgress = new PlayerProgress();
-            playerProgress.GameData.Level = "1";
+            playerProgress.GameData.Level = 1;
             return playerProgress;
         }
     }

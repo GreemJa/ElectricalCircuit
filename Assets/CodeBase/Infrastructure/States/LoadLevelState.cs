@@ -46,7 +46,7 @@ namespace CodeBase.Infrastructure.States
 
       InitUIRoot();
       InitGameplayWindow();
-      InitSpawners(levelData);
+      InitDeviceSpawners(levelData);
     }
 
     private LevelStaticData LevelStaticData() => 
@@ -58,10 +58,7 @@ namespace CodeBase.Infrastructure.States
     private void InitGameplayWindow() => 
       _uiFactory.CreateGameplayWindow();
 
-    private void InitSpawners(LevelStaticData levelData)
-    {
-      foreach (DeviceSpawnerData spawnerData in levelData.EnemySpawners)
-        _uiFactory.CreateDeviceSpawners(spawnerData.Transform,spawnerData.DeviceTypeId, spawnerData.DeviceState);
-    }
+    private void InitDeviceSpawners(LevelStaticData levelData) => 
+      _uiFactory.CreateDeviceSpawners(levelData);
   }
 }
