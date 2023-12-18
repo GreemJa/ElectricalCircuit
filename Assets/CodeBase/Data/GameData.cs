@@ -5,6 +5,6 @@ namespace CodeBase.Data
     [Serializable]
     public class GameData
     {
-        public string Level;
+        public int Level;
     }
 }
