@@ -1,9 +1,12 @@
-﻿using CodeBase.Infrastructure.AssetManagement;
+﻿using System.Collections.Generic;
+using CodeBase.Data;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.States;
 using CodeBase.Logic;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Device;
+using CodeBase.StaticData.Levels;
 using CodeBase.StaticData.Windows;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Windows;
@@ -15,6 +18,7 @@ namespace CodeBase.UI.Services.Factory
     public class UIFactory : IUIFactory
     {
         public Transform UIRoot;
+        
         private readonly IAssetProvider _assetProvider;
         private readonly IStaticDataService _staticData;
         private readonly IPersistentProgressService _progressService;
@@ -36,7 +40,7 @@ namespace CodeBase.UI.Services.Factory
         {
             WindowConfig config = _staticData.ForWindow(WindowId.Menu);
             WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
-            window.Construct(_progressService, _stateMachine, _staticData);
+            window.Construct(_progressService, _stateMachine, _staticData, this);
 
             foreach (OpenWindowButton button in window.GetComponentsInChildren<OpenWindowButton>())
             {
@@ -50,22 +54,35 @@ namespace CodeBase.UI.Services.Factory
         {
             WindowConfig config = _staticData.ForWindow(WindowId.InProgress);
             WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
-            window.Construct(_progressService, _stateMachine, _staticData);
+            window.Construct(_progressService, _stateMachine, _staticData, this);
         }
 
         public void CreateGameplayWindow()
         {
             WindowConfig config = _staticData.ForWindow(WindowId.Gameplay);
             WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
-            window.Construct(_progressService, _stateMachine, _staticData);
+            window.Construct(_progressService, _stateMachine, _staticData, this);
         }
 
-        public void CreateDeviceSpawners(Transform at, DeviceTypeId deviceTypeId, DeviceState deviceState)
+        public void CreateDeviceSpawners(LevelStaticData levelData)
         {
-            DeviceSpawner spawner =
-                _assetProvider.Instantiate(AssetPath.DeviceSpawner, at).GetComponent<DeviceSpawner>();
-            spawner.DeviceTypeId = deviceTypeId;
-            spawner.DeviceState = deviceState;
+            foreach (DeviceSpawnerData spawnerData in levelData.EnemySpawners)
+            {
+                DeviceSpawner spawner = _assetProvider.Instantiate(AssetPath.DeviceSpawnerPath, spawnerData.TransformData, UIRoot).GetComponent<DeviceSpawner>();
+                spawner.DeviceTypeId = spawnerData.DeviceTypeId;
+                spawner.DeviceState = spawnerData.DeviceState;
+                spawner.Construct(this);
+                spawner.Spawn(spawnerData);
+            }
+        }
+
+        public void CreateDevice(DeviceSpawnerData spawnerData)
+        {
+            
+        }
+
+        public void Cleanup()
+        {
         }
     }
 }

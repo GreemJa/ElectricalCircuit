@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using CodeBase.Logic;
+using CodeBase.StaticData.Levels;
+using CodeBase.UI.Elements;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,26 +11,24 @@ namespace CodeBase.UI.Windows
     public sealed class GameplayWindow : WindowBase
     {
         public Image ContentImage;
+        private List<DeviceSpawner> _deviceSpawner = new();
         
         protected override void OnAwake()
         {
-            throw new System.NotImplementedException();
         }
 
         protected override void Initialize()
         {
-            Sprite contentSprite = _staticData.ForLevel(SceneManager.GetActiveScene().name).ContentSprite;
-            ContentImage.sprite = contentSprite;
+            LevelStaticData levelData = _staticData.ForLevel(SceneManager.GetActiveScene().name);
+            ContentImage.sprite = levelData.ContentSprite;
         }
 
         protected override void SubscribeUpdates()
         {
-            throw new System.NotImplementedException();
         }
 
         protected override void CleanUp()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

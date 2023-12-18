@@ -14,17 +14,14 @@ namespace CodeBase.UI.Windows
 
         protected override void Initialize()
         {
-            throw new System.NotImplementedException();
         }
 
         protected override void SubscribeUpdates()
         {
-            throw new System.NotImplementedException();
         }
 
         protected override void CleanUp()
         {
-            throw new System.NotImplementedException();
         }
     }
 }
