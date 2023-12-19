@@ -14,29 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: Level 10
   DeviceSpawners:
-  - DeviceTypeId: 2
-    DeviceState: 0
-    TransformData:
-      Position:
-        X: 1018
-        Y: 1283
-        Z: 0
-      Rotation:
-        X: -0
-        Y: -0
-        Z: -0
-        W: 1
-      LocalScale:
-        X: 0.97
-        Y: 0.97
-        Z: 0.97
-    CorrectDeviceTypes: 02000000
   - DeviceTypeId: 1
     DeviceState: 0
     TransformData:
       Position:
-        X: 863
-        Y: 1567
+        X: 647.25
+        Y: 1175.25
         Z: 0
       Rotation:
         X: -0
@@ -52,8 +35,8 @@ MonoBehaviour:
     DeviceState: 0
     TransformData:
       Position:
-        X: 1168
-        Y: 1567
+        X: 876
+        Y: 1175.25
         Z: 0
       Rotation:
         X: -0
@@ -69,8 +52,8 @@ MonoBehaviour:
     DeviceState: 1
     TransformData:
       Position:
-        X: 270
-        Y: 1567
+        X: 202.5
+        Y: 1175.25
         Z: 0
       Rotation:
         X: -0
@@ -86,8 +69,8 @@ MonoBehaviour:
     DeviceState: 0
     TransformData:
       Position:
-        X: 422
-        Y: 1283
+        X: 316.5
+        Y: 962.25
         Z: 0
       Rotation:
         X: -0
@@ -103,8 +86,8 @@ MonoBehaviour:
     DeviceState: 0
     TransformData:
       Position:
-        X: 564
-        Y: 1567
+        X: 423
+        Y: 1175.25
         Z: 0
       Rotation:
         X: -0
@@ -120,8 +103,25 @@ MonoBehaviour:
     DeviceState: 0
     TransformData:
       Position:
-        X: 725
-        Y: 1283
+        X: 763.5
+        Y: 962.25
+        Z: 0
+      Rotation:
+        X: -0
+        Y: -0
+        Z: -0
+        W: 1
+      LocalScale:
+        X: 0.97
+        Y: 0.97
+        Z: 0.97
+    CorrectDeviceTypes: 02000000
+  - DeviceTypeId: 2
+    DeviceState: 0
+    TransformData:
+      Position:
+        X: 543.75
+        Y: 962.25
         Z: 0
       Rotation:
         X: -0

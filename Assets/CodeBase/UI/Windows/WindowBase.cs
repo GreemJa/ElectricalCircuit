@@ -1,5 +1,6 @@
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Infrastructure.States;
 using CodeBase.StaticData;
 using CodeBase.UI.Services.Factory;
@@ -14,13 +15,15 @@ namespace CodeBase.UI.Windows
         protected IPersistentProgressService _progressService;
         protected IGameStateMachine _gameStateMachine;
         protected IUIFactory _uiFactory;
+        protected ISaveLoadProgressService _saveLoadProgressService;
         protected PlayerProgress Progress => _progressService.Progress;
         
-        public void Construct(IPersistentProgressService progressService, IGameStateMachine gameStateMachine, IUIFactory uiFactory)
+        public void Construct(IPersistentProgressService progressService, IGameStateMachine gameStateMachine, IUIFactory uiFactory, ISaveLoadProgressService saveLoadProgressService)
         {
             _progressService = progressService;
             _gameStateMachine = gameStateMachine;
             _uiFactory = uiFactory;
+            _saveLoadProgressService = saveLoadProgressService;
         }
 
         private void Awake() => 

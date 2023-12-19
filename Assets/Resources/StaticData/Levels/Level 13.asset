@@ -18,25 +18,8 @@ MonoBehaviour:
     DeviceState: 0
     TransformData:
       Position:
-        X: 569.8
-        Y: 1855.2
-        Z: 0
-      Rotation:
-        X: -0
-        Y: -0
-        Z: -0
-        W: 1
-      LocalScale:
-        X: 1
-        Y: 1
-        Z: 1
-    CorrectDeviceTypes: 0b000000
-  - DeviceTypeId: 11
-    DeviceState: 0
-    TransformData:
-      Position:
-        X: 855.1
-        Y: 1853.6
+        X: 641.325
+        Y: 1390.2
         Z: 0
       Rotation:
         X: -0
@@ -52,8 +35,8 @@ MonoBehaviour:
     DeviceState: 1
     TransformData:
       Position:
-        X: 1120
-        Y: 1569
+        X: 840
+        Y: 1176.75
         Z: 0
       Rotation:
         X: -0
@@ -65,12 +48,29 @@ MonoBehaviour:
         Y: 1
         Z: 1
     CorrectDeviceTypes: 01000000
+  - DeviceTypeId: 11
+    DeviceState: 0
+    TransformData:
+      Position:
+        X: 427.35
+        Y: 1391.4
+        Z: 0
+      Rotation:
+        X: -0
+        Y: -0
+        Z: -0
+        W: 1
+      LocalScale:
+        X: 1
+        Y: 1
+        Z: 1
+    CorrectDeviceTypes: 0b000000
   - DeviceTypeId: 0
     DeviceState: 1
     TransformData:
       Position:
-        X: 314
-        Y: 1552
+        X: 235.5
+        Y: 1164
         Z: 0
       Rotation:
         X: -0
@@ -86,8 +86,8 @@ MonoBehaviour:
     DeviceState: 0
     TransformData:
       Position:
-        X: 703
-        Y: 1284
+        X: 527.25
+        Y: 963
         Z: 0
       Rotation:
         X: -0

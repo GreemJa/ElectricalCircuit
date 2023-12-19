@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Infrastructure.States;
 using CodeBase.Logic;
 using CodeBase.StaticData.Levels;
@@ -24,9 +25,9 @@ namespace CodeBase.UI.Windows
         private Transform _content;
         private Transform _inventoryContent;
 
-        public void Construct(IPersistentProgressService progressService, IGameStateMachine gameStateMachine, IUIFactory uiFactory, IWindowService windowService)
+        public void Construct(IPersistentProgressService progressService, IGameStateMachine gameStateMachine, IUIFactory uiFactory, ISaveLoadProgressService saveLoadProgressService , IWindowService windowService)
         {
-            base.Construct(progressService, gameStateMachine, uiFactory);
+            base.Construct(progressService, gameStateMachine, uiFactory, saveLoadProgressService);
             _windowService = windowService;
         }
 

@@ -8,8 +8,24 @@ namespace CodeBase.UI.Windows
     public sealed class MenuWindow : WindowBase
     {
         public Button PlayBtn;
+        public Button CleanBtn;
 
-        protected override void OnAwake() => 
-            PlayBtn.onClick.AddListener(()=>_gameStateMachine.Enter<LoadLevelState,string>($"Level {_progressService.Progress.GameData.Level}"));
+        protected override void OnAwake()
+        {
+            PlayBtn.onClick.AddListener(OnPlayBtn);
+            CleanBtn.onClick.AddListener(OnCleanBtn);
+        }
+
+        private void OnCleanBtn()
+        {
+            _progressService.Progress.GameData.Level = 1;
+            _progressService.Progress.GameData.MaxLevel = 17;
+            _saveLoadProgressService.SaveProgress();
+        }
+
+        private void OnPlayBtn()
+        {
+            _gameStateMachine.Enter<LoadLevelState, string>($"Level {_progressService.Progress.GameData.Level}");
+        }
     }
 }

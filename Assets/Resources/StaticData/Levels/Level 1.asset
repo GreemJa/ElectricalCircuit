@@ -18,8 +18,8 @@ MonoBehaviour:
     DeviceState: 0
     TransformData:
       Position:
-        X: 952.7
-        Y: 1538.2
+        X: 714.525
+        Y: 1153.65
         Z: 0
       Rotation:
         X: -0
@@ -35,8 +35,8 @@ MonoBehaviour:
     DeviceState: 1
     TransformData:
       Position:
-        X: 486.2
-        Y: 1535.3
+        X: 364.65
+        Y: 1151.475
         Z: 0
       Rotation:
         X: -0

@@ -43,7 +43,7 @@ namespace CodeBase.UI.Services.Factory
         {
             WindowConfig config = _staticData.ForWindow(WindowId.Menu);
             WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
-            window.Construct(_progressService, _stateMachine, this);
+            window.Construct(_progressService, _stateMachine, this, _saveLoadProgressService);
 
             foreach (OpenWindowButton button in window.GetComponentsInChildren<OpenWindowButton>())
                 button.Construct(windowService);
@@ -54,7 +54,7 @@ namespace CodeBase.UI.Services.Factory
             WindowConfig config = _staticData.ForWindow(WindowId.InProgress);
             WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
             
-            window.Construct(_progressService, _stateMachine, this);
+            window.Construct(_progressService, _stateMachine, this, _saveLoadProgressService);
         }
 
         public void CreateGameplayWindow(LevelStaticData levelData, IWindowService windowService)
@@ -62,7 +62,7 @@ namespace CodeBase.UI.Services.Factory
             WindowConfig config = _staticData.ForWindow(WindowId.Gameplay);
             GameplayWindow window = Object.Instantiate(config.Prefab, UIRoot).GetComponent<GameplayWindow>();
             
-            window.Construct(_progressService, _stateMachine, this, windowService);
+            window.Construct(_progressService, _stateMachine, this, _saveLoadProgressService, windowService);
             window.Initialize(levelData);
         }
 
@@ -79,7 +79,7 @@ namespace CodeBase.UI.Services.Factory
             WindowConfig config = _staticData.ForWindow(WindowId.LoseWindow);
             WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
             
-            window.Construct(_progressService, _stateMachine, this);
+            window.Construct(_progressService, _stateMachine, this, _saveLoadProgressService);
         }
 
         public void CreateDeviceSpawners(LevelStaticData levelData, Transform parent)

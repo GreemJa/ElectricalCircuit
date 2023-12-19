@@ -9,17 +9,9 @@ namespace CodeBase.UI.Windows
 {
     public sealed class WinWindow : WindowBase
     {
-        private ISaveLoadProgressService _saveLoadProgressService;
-        
         public Button ContinueButton;
         public TMP_Text LevelNumberText, LevelNumberTextOutline;
 
-        public void Construct(IPersistentProgressService progressService, IGameStateMachine gameStateMachine, IUIFactory uiFactory, ISaveLoadProgressService saveLoadProgressService)
-        {
-            base.Construct(progressService,gameStateMachine,uiFactory);
-            _saveLoadProgressService = saveLoadProgressService;
-        }
-        
         protected override void Initialize()
         {
             base.Initialize();

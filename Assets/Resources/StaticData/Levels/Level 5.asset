@@ -18,8 +18,8 @@ MonoBehaviour:
     DeviceState: 0
     TransformData:
       Position:
-        X: 1110
-        Y: 1540
+        X: 832.5
+        Y: 1155
         Z: 0
       Rotation:
         X: -0
@@ -35,8 +35,8 @@ MonoBehaviour:
     DeviceState: 0
     TransformData:
       Position:
-        X: 792
-        Y: 1540
+        X: 594
+        Y: 1155
         Z: 0
       Rotation:
         X: -0
@@ -52,8 +52,8 @@ MonoBehaviour:
     DeviceState: 1
     TransformData:
       Position:
-        X: 337
-        Y: 1540
+        X: 252.75
+        Y: 1155
         Z: 0
       Rotation:
         X: -0
@@ -69,8 +69,8 @@ MonoBehaviour:
     DeviceState: 0
     TransformData:
       Position:
-        X: 644
-        Y: 1239
+        X: 483
+        Y: 929.25
         Z: 0
       Rotation:
         X: -0
@@ -86,8 +86,8 @@ MonoBehaviour:
     DeviceState: 1
     TransformData:
       Position:
-        X: 636
-        Y: 1853
+        X: 477
+        Y: 1389.75
         Z: 0
       Rotation:
         X: -0
