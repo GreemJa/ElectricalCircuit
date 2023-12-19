@@ -2,6 +2,7 @@
 using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Infrastructure.States;
 using CodeBase.Logic;
 using CodeBase.StaticData;
@@ -23,62 +24,95 @@ namespace CodeBase.UI.Services.Factory
         private readonly IStaticDataService _staticData;
         private readonly IPersistentProgressService _progressService;
         private readonly IGameStateMachine _stateMachine;
+        private readonly ISaveLoadProgressService _saveLoadProgressService;
 
         public UIFactory(IAssetProvider assetProvider, IStaticDataService staticData,
-            IPersistentProgressService progressService, IGameStateMachine stateMachine)
+            IPersistentProgressService progressService, IGameStateMachine stateMachine, ISaveLoadProgressService saveLoadProgressService)
         {
             _assetProvider = assetProvider;
             _staticData = staticData;
             _progressService = progressService;
             _stateMachine = stateMachine;
+            _saveLoadProgressService = saveLoadProgressService;
         }
 
         public void CreateUIRoot() =>
             UIRoot = _assetProvider.Instantiate(AssetPath.UIRootPath).transform;
 
-        public void CreateMenu(IWindowService windowService)
+        public void CreateMenuWindow(IWindowService windowService)
         {
             WindowConfig config = _staticData.ForWindow(WindowId.Menu);
             WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
-            window.Construct(_progressService, _stateMachine, _staticData, this);
+            window.Construct(_progressService, _stateMachine, this);
 
             foreach (OpenWindowButton button in window.GetComponentsInChildren<OpenWindowButton>())
-            {
                 button.Construct(windowService);
-            }
-
-            Debug.Log($"Progress = {_progressService.Progress.GameData.Level}");
         }
 
-        public void CreateInProgress()
+        public void CreateInProgressWindow()
         {
             WindowConfig config = _staticData.ForWindow(WindowId.InProgress);
             WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
-            window.Construct(_progressService, _stateMachine, _staticData, this);
+            
+            window.Construct(_progressService, _stateMachine, this);
         }
 
-        public void CreateGameplayWindow()
+        public void CreateGameplayWindow(LevelStaticData levelData, IWindowService windowService)
         {
             WindowConfig config = _staticData.ForWindow(WindowId.Gameplay);
-            WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
-            window.Construct(_progressService, _stateMachine, _staticData, this);
+            GameplayWindow window = Object.Instantiate(config.Prefab, UIRoot).GetComponent<GameplayWindow>();
+            
+            window.Construct(_progressService, _stateMachine, this, windowService);
+            window.Initialize(levelData);
         }
 
-        public void CreateDeviceSpawners(LevelStaticData levelData)
+        public void CreateWinWindow()
         {
-            foreach (DeviceSpawnerData spawnerData in levelData.EnemySpawners)
+            WindowConfig config = _staticData.ForWindow(WindowId.WinWindow);
+            WinWindow window = Object.Instantiate(config.Prefab, UIRoot).GetComponent<WinWindow>();
+            
+            window.Construct(_progressService, _stateMachine, this, _saveLoadProgressService);
+        }
+
+        public void CreateLoseWindow()
+        {
+            WindowConfig config = _staticData.ForWindow(WindowId.LoseWindow);
+            WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
+            
+            window.Construct(_progressService, _stateMachine, this);
+        }
+
+        public void CreateDeviceSpawners(LevelStaticData levelData, Transform parent)
+        {
+            foreach (DeviceSpawnerData spawnerData in levelData.DeviceSpawners)
             {
-                DeviceSpawner spawner = _assetProvider.Instantiate(AssetPath.DeviceSpawnerPath, spawnerData.TransformData, UIRoot).GetComponent<DeviceSpawner>();
-                spawner.DeviceTypeId = spawnerData.DeviceTypeId;
-                spawner.DeviceState = spawnerData.DeviceState;
+                DeviceSpawner spawner = _assetProvider.Instantiate(AssetPath.DeviceSpawnerPath, spawnerData.TransformData, parent).GetComponent<DeviceSpawner>();
                 spawner.Construct(this);
-                spawner.Spawn(spawnerData);
+                spawner.Initialize(spawnerData.DeviceTypeId, spawnerData.DeviceState, spawnerData.CorrectDeviceTypes);
+                spawner.Spawn(spawnerData, spawner.transform);
             }
         }
 
-        public void CreateDevice(DeviceSpawnerData spawnerData)
+        public void CreateDevice(DeviceSpawnerData spawnerData, Transform parent)
         {
-            
+            Device device = _assetProvider
+                .Instantiate(AssetPath.DevicePath, parent)
+                .GetComponent<Device>();
+
+            device.Construct(_staticData);
+            device.Initialize(spawnerData.DeviceTypeId, spawnerData.DeviceState);
+        }
+
+        public void CreateInventoryItems(LevelStaticData levelData, Transform parent)
+        {
+            foreach (InventoryItemsData itemsData in levelData.InventoryItems)
+            {
+                UnifiedInventoryItems items = _assetProvider
+                    .Instantiate(AssetPath.UnifiedInventoryItemsPath, parent)
+                    .GetComponent<UnifiedInventoryItems>();
+
+                items.Initialize(itemsData.Count, _staticData.ForDevice(itemsData.DeviceTypeId));
+            }
         }
 
         public void Cleanup()

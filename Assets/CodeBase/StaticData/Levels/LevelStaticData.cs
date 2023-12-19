@@ -2,6 +2,7 @@
 using CodeBase.Logic;
 using CodeBase.StaticData.Device;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CodeBase.StaticData.Levels
 {
@@ -9,7 +10,8 @@ namespace CodeBase.StaticData.Levels
     public class LevelStaticData : ScriptableObject
     {
         public string LevelKey;
-        public List<DeviceSpawnerData> EnemySpawners = new();
+        [FormerlySerializedAs("EnemySpawners")] public List<DeviceSpawnerData> DeviceSpawners = new();
+        public List<InventoryItemsData> InventoryItems = new();
         public Sprite ContentSprite;
     }
 }

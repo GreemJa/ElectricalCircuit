@@ -2,8 +2,8 @@ namespace CodeBase.StaticData.Device
 {
     public enum DeviceState
     {
-        Empty,
-        Filled,
-        Сonnected
+        Empty = 0,
+        Filled = 1,
+        Сonnected = 2,
     }
 }

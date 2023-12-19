@@ -12,11 +12,14 @@ namespace CodeBase.UI.Services.Factory
     public interface IUIFactory : IService
     {
         void CreateUIRoot();
-        void CreateMenu(IWindowService windowService);
-        void CreateInProgress();
-        void CreateGameplayWindow();
-        void CreateDeviceSpawners(LevelStaticData levelData);
-        void CreateDevice(DeviceSpawnerData deviceData);
+        void CreateMenuWindow(IWindowService windowService);
+        void CreateInProgressWindow();
+        void CreateGameplayWindow(LevelStaticData levelData, IWindowService windowService);
+        void CreateWinWindow();
+        void CreateLoseWindow();
+        void CreateDeviceSpawners(LevelStaticData levelData, Transform parent);
+        void CreateDevice(DeviceSpawnerData deviceData, Transform parent);
+        void CreateInventoryItems(LevelStaticData levelData, Transform parent);
         void Cleanup();
     }
 }

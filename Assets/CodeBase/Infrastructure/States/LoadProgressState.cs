@@ -33,13 +33,16 @@ namespace CodeBase.Infrastructure.States
         private void LoadProgressOrInitNew()
         {
             _progressService.Progress = 
-                /*_saveLoadProgressService.LoadProgress() 
-                ??*/ NewProgress();
+                _saveLoadProgressService.LoadProgress() 
+                ?? NewProgress();
+            
+            Debug.Log($"Progress = {_progressService.Progress.GameData.MaxLevel} {_progressService.Progress.GameData.Level}");
         }
 
         private PlayerProgress NewProgress()
         {
             PlayerProgress playerProgress = new PlayerProgress();
+            playerProgress.GameData.MaxLevel = 17;
             playerProgress.GameData.Level = 1;
             return playerProgress;
         }

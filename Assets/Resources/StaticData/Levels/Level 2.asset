@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   LevelKey: Level 2
-  EnemySpawners:
+  DeviceSpawners:
   - DeviceTypeId: 2
     DeviceState: 0
     TransformData:
@@ -30,6 +30,7 @@ MonoBehaviour:
         X: 1
         Y: 1
         Z: 1
+    CorrectDeviceTypes: 02000000
   - DeviceTypeId: 0
     DeviceState: 1
     TransformData:
@@ -46,6 +47,7 @@ MonoBehaviour:
         X: 1
         Y: 1
         Z: 1
+    CorrectDeviceTypes: 00000000
   - DeviceTypeId: 1
     DeviceState: 1
     TransformData:
@@ -62,4 +64,8 @@ MonoBehaviour:
         X: 1
         Y: 1
         Z: 1
+    CorrectDeviceTypes: 01000000
+  InventoryItems:
+  - DeviceTypeId: 2
+    Count: 1
   ContentSprite: {fileID: 21300000, guid: 2b77423211eb9004ea4461d4520f0067, type: 3}

@@ -6,5 +6,7 @@ namespace CodeBase.UI.Services.Windows
         Menu = 1,
         InProgress = 2,
         Gameplay = 3,
+        LoseWindow = 4,
+        WinWindow = 5,
     }
 }

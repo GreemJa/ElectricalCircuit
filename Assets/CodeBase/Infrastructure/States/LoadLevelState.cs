@@ -3,6 +3,7 @@ using CodeBase.StaticData;
 using CodeBase.StaticData.Device;
 using CodeBase.StaticData.Levels;
 using CodeBase.UI.Services.Factory;
+using CodeBase.UI.Services.Windows;
 using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure.States
@@ -14,14 +15,16 @@ namespace CodeBase.Infrastructure.States
     private readonly LoadingCurtain _loadingCurtain;
     private readonly IUIFactory _uiFactory;
     private readonly IStaticDataService _staticData;
+    private readonly IWindowService _windowService;
 
-    public LoadLevelState(GameStateMachine gameGameStateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IUIFactory uiFactory, IStaticDataService staticData)
+    public LoadLevelState(GameStateMachine gameGameStateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IUIFactory uiFactory, IStaticDataService staticData, IWindowService windowService)
     {
       _gameStateMachine = gameGameStateMachine;
       _sceneLoader = sceneLoader;
       _loadingCurtain = loadingCurtain;
       _uiFactory = uiFactory;
       _staticData = staticData;
+      _windowService = windowService;
     }
 
     public void Enter(string sceneName)
@@ -45,8 +48,7 @@ namespace CodeBase.Infrastructure.States
       LevelStaticData levelData = LevelStaticData();
 
       InitUIRoot();
-      InitGameplayWindow();
-      InitDeviceSpawners(levelData);
+      InitGameplayWindow(levelData);
     }
 
     private LevelStaticData LevelStaticData() => 
@@ -55,10 +57,7 @@ namespace CodeBase.Infrastructure.States
     private void InitUIRoot() => 
       _uiFactory.CreateUIRoot();
 
-    private void InitGameplayWindow() => 
-      _uiFactory.CreateGameplayWindow();
-
-    private void InitDeviceSpawners(LevelStaticData levelData) => 
-      _uiFactory.CreateDeviceSpawners(levelData);
+    private void InitGameplayWindow(LevelStaticData levelData) => 
+      _uiFactory.CreateGameplayWindow(levelData, _windowService);
   }
 }

@@ -1,5 +1,5 @@
-﻿using CodeBase.StaticData.Device;
-using CodeBase.StaticData.Levels;
+﻿using System.Collections.Generic;
+using CodeBase.StaticData.Device;
 using CodeBase.UI.Services.Factory;
 using UnityEngine;
 
@@ -9,6 +9,7 @@ namespace CodeBase.UI.Elements
     {
         public DeviceTypeId DeviceTypeId;
         public DeviceState DeviceState;
+        public List<DeviceTypeId> CorrectDeviceTypes = new();
 
         private IUIFactory _uiFactory;
 
@@ -16,10 +17,17 @@ namespace CodeBase.UI.Elements
         {
             _uiFactory = uiFactory;
         }
-        
-        public void Spawn(DeviceSpawnerData deviceData)
+
+        public void Initialize(DeviceTypeId deviceTypeId, DeviceState deviceState, List<DeviceTypeId> correctDeviceTypes)
         {
-            _uiFactory.CreateDevice(deviceData);
+            DeviceTypeId = deviceTypeId;
+            DeviceState = deviceState;
+            CorrectDeviceTypes = new List<DeviceTypeId>(correctDeviceTypes);
+        }
+        
+        public void Spawn(DeviceSpawnerData deviceData, Transform parent)
+        {
+            _uiFactory.CreateDevice(deviceData, parent);
         }
     }
 }

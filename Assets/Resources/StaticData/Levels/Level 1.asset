@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   LevelKey: Level 1
-  EnemySpawners:
-  - DeviceTypeId: 1
+  DeviceSpawners:
+  - DeviceTypeId: 10
     DeviceState: 0
     TransformData:
       Position:
@@ -30,6 +30,7 @@ MonoBehaviour:
         X: 1
         Y: 1
         Z: 1
+    CorrectDeviceTypes: 01000000
   - DeviceTypeId: 0
     DeviceState: 1
     TransformData:
@@ -40,10 +41,14 @@ MonoBehaviour:
       Rotation:
         X: -0
         Y: -0
-        Z: -0.3258612
-        W: 0.94541764
+        Z: -0
+        W: 1
       LocalScale:
         X: 1
         Y: 1
         Z: 1
+    CorrectDeviceTypes: 00000000
+  InventoryItems:
+  - DeviceTypeId: 1
+    Count: 1
   ContentSprite: {fileID: 21300000, guid: d5459e09594e9d644be82fc119973e84, type: 3}

@@ -13,15 +13,13 @@ namespace CodeBase.UI.Windows
     {
         protected IPersistentProgressService _progressService;
         protected IGameStateMachine _gameStateMachine;
-        protected IStaticDataService _staticData;
         protected IUIFactory _uiFactory;
         protected PlayerProgress Progress => _progressService.Progress;
         
-        public void Construct(IPersistentProgressService progressService, IGameStateMachine gameStateMachine, IStaticDataService staticData, IUIFactory uiFactory)
+        public void Construct(IPersistentProgressService progressService, IGameStateMachine gameStateMachine, IUIFactory uiFactory)
         {
             _progressService = progressService;
             _gameStateMachine = gameStateMachine;
-            _staticData = staticData;
             _uiFactory = uiFactory;
         }
 
@@ -37,12 +35,12 @@ namespace CodeBase.UI.Windows
         private void OnDestroy() => 
             CleanUp();
 
-        protected abstract void OnAwake();
+        protected virtual void OnAwake() {}
 
-        protected abstract void Initialize();
+        protected virtual void Initialize() {}
 
-        protected abstract void SubscribeUpdates();
+        protected virtual void SubscribeUpdates() {}
 
-        protected abstract void CleanUp();
+        protected virtual void CleanUp() {}
     }
 }

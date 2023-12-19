@@ -40,7 +40,7 @@ namespace CodeBase.Infrastructure.States
         private void InitMenu()
         {
             _uiFactory.CreateUIRoot();
-            _uiFactory.CreateMenu(_windowService);
+            _uiFactory.CreateMenuWindow(_windowService);
         }
     }
 }

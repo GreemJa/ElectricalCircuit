@@ -22,7 +22,7 @@ namespace CodeBase.Infrastructure.States
         [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
         [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>(), services.Single<ISaveLoadProgressService>()),
         [typeof(LoadMenuState)] = new LoadMenuState(this, sceneLoader, loadingCurtain, services.Single<IUIFactory>(), services.Single<IWindowService>()), 
-        [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IUIFactory>(), services.Single<IStaticDataService>()),
+        [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IUIFactory>(), services.Single<IStaticDataService>(), services.Single<IWindowService>()),
         [typeof(GameLoopState)] = new GameLoopState(this),
       };
     }

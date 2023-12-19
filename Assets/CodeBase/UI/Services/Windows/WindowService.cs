@@ -1,4 +1,5 @@
 using CodeBase.UI.Services.Factory;
+using UnityEngine;
 
 namespace CodeBase.UI.Services.Windows
 {
@@ -10,7 +11,7 @@ namespace CodeBase.UI.Services.Windows
         {
             _uiFactory = uiFactory;
         }
-        
+
         public void Open(WindowId windowId)
         {
             switch (windowId)
@@ -18,10 +19,16 @@ namespace CodeBase.UI.Services.Windows
                 case WindowId.Unknown:
                     break;
                 case WindowId.Menu:
-                    _uiFactory.CreateMenu(this);
+                    _uiFactory.CreateMenuWindow(this);
                     break;
                 case WindowId.InProgress:
-                    _uiFactory.CreateInProgress();
+                    _uiFactory.CreateInProgressWindow();
+                    break;
+                case WindowId.WinWindow:
+                    _uiFactory.CreateWinWindow();
+                    break;
+                case WindowId.LoseWindow:
+                    _uiFactory.CreateLoseWindow();
                     break;
             }
         }

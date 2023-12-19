@@ -28,8 +28,12 @@ namespace CodeBase.Editor
             {
                 levelData.LevelKey = SceneManager.GetActiveScene().name;
                 
-                levelData.EnemySpawners = FindObjectsOfType<DeviceSpawner>()
-                    .Select(x => new DeviceSpawnerData(x.DeviceTypeId, x.DeviceState, x.transform.AsTransformData()))
+                levelData.DeviceSpawners = FindObjectsOfType<DeviceSpawner>()
+                    .Select(x => new DeviceSpawnerData(x.DeviceTypeId, x.DeviceState, x.transform.AsTransformData(),x.CorrectDeviceTypes))
+                    .ToList();
+
+                levelData.InventoryItems = FindObjectsOfType<UnifiedInventoryItems>()
+                    .Select(x => new InventoryItemsData(x.DeviceTypeId, x.Count))
                     .ToList();
                 
                 levelData.ContentSprite = Resources.Load<Sprite>(AssetPath.ContentSprites+$"/{levelData.LevelKey}");

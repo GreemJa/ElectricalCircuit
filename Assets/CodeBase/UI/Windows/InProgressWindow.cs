@@ -8,17 +8,5 @@ namespace CodeBase.UI.Windows
         
         protected override void OnAwake() => 
             CloseButton.onClick.AddListener(()=>Destroy(gameObject));
-
-        protected override void Initialize()
-        {
-        }
-
-        protected override void SubscribeUpdates()
-        {
-        }
-
-        protected override void CleanUp()
-        {
-        }
     }
 }

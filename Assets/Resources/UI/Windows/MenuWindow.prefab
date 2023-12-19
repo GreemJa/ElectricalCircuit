@@ -532,6 +532,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2323660318914186124, guid: 2ba4acbedc0808f44976958be6e5b16c, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2323660318914186124, guid: 2ba4acbedc0808f44976958be6e5b16c, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 050fcb212fc472b479647d3775dd2dac, type: 2}
     - target: {fileID: 7259601424820298229, guid: 2ba4acbedc0808f44976958be6e5b16c, type: 3}
       propertyPath: m_Name
       value: Play_button

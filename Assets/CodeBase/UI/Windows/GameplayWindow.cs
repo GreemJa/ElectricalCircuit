@@ -1,7 +1,11 @@
 using System.Collections.Generic;
+using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.States;
 using CodeBase.Logic;
 using CodeBase.StaticData.Levels;
 using CodeBase.UI.Elements;
+using CodeBase.UI.Services.Factory;
+using CodeBase.UI.Services.Windows;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,25 +14,46 @@ namespace CodeBase.UI.Windows
 {
     public sealed class GameplayWindow : WindowBase
     {
-        public Image ContentImage;
-        private List<DeviceSpawner> _deviceSpawner = new();
+        private IWindowService _windowService;
         
+        public Image ContentImage;
+        public Inventory Inventory;
+        public DevicesObserver DevicesObserver;
+        public Button MenuButton, TaskButton, ProgressButton, GuideButton;
+        
+        private Transform _content;
+        private Transform _inventoryContent;
+
+        public void Construct(IPersistentProgressService progressService, IGameStateMachine gameStateMachine, IUIFactory uiFactory, IWindowService windowService)
+        {
+            base.Construct(progressService, gameStateMachine, uiFactory);
+            _windowService = windowService;
+        }
+
         protected override void OnAwake()
         {
+            _content = ContentImage.transform;
+            _inventoryContent = Inventory.transform;
+            
+            MenuButton.onClick.AddListener(()=>_gameStateMachine.Enter<LoadMenuState,string>("Main"));
+            TaskButton.onClick.AddListener(()=>_windowService.Open(WindowId.InProgress));
+            ProgressButton.onClick.AddListener(()=>_windowService.Open(WindowId.InProgress));
+            GuideButton.onClick.AddListener(()=>_windowService.Open(WindowId.InProgress));
         }
 
-        protected override void Initialize()
+        public void Initialize(LevelStaticData levelData)
         {
-            LevelStaticData levelData = _staticData.ForLevel(SceneManager.GetActiveScene().name);
+            foreach (OpenWindowButton button in GetComponentsInChildren<OpenWindowButton>())
+                button.Construct(_windowService);
+            
+            _uiFactory.CreateDeviceSpawners(levelData, _content);
+            _uiFactory.CreateInventoryItems(levelData, _inventoryContent);
+
             ContentImage.sprite = levelData.ContentSprite;
-        }
-
-        protected override void SubscribeUpdates()
-        {
-        }
-
-        protected override void CleanUp()
-        {
+            
+            DevicesObserver.Construct(_windowService);
+            DevicesObserver.Initialize();
+            Inventory.Initialize();
         }
     }
 }
