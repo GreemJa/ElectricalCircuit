@@ -1,4 +1,5 @@
 using CodeBase.Data;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.AssetManagement
@@ -20,9 +21,9 @@ namespace CodeBase.Infrastructure.AssetManagement
       return gameObject;
     }
 
-    public GameObject Instantiate(string path)
+    public T Instantiate<T>(string path) where T : Object
     {
-      var prefab = Resources.Load<GameObject>(path);
+      var prefab = Resources.Load<T>(path);
       return Object.Instantiate(prefab);
     }
 

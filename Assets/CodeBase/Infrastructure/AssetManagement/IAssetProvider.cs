@@ -8,7 +8,7 @@ namespace CodeBase.Infrastructure.AssetManagement
     {
         GameObject Instantiate(string path, Vector3 at);
         GameObject Instantiate(string path, TransformData at, Transform parent);
-        GameObject Instantiate(string path);
+        T Instantiate<T>(string path) where T : Object;
         GameObject Instantiate(string path, Transform parent);
     }
 }
