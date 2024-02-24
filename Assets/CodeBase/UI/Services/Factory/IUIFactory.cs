@@ -5,6 +5,7 @@ using CodeBase.Logic;
 using CodeBase.StaticData.Device;
 using CodeBase.StaticData.Levels;
 using CodeBase.UI.Services.Windows;
+using CodeBase.UI.Windows;
 using UnityEngine;
 
 namespace CodeBase.UI.Services.Factory
@@ -13,10 +14,8 @@ namespace CodeBase.UI.Services.Factory
     {
         void CreateUIRoot();
         void CreateMenuWindow(IWindowService windowService);
-        void CreateInProgressWindow();
         void CreateGameplayWindow(LevelStaticData levelData, IWindowService windowService);
-        void CreateWinWindow();
-        void CreateLoseWindow();
+        WindowBase CreateWindow(WindowId windowId);
         void CreateDeviceSpawners(LevelStaticData levelData, Transform parent);
         void CreateDevice(DeviceSpawnerData deviceData, Transform parent);
         void CreateInventoryItems(LevelStaticData levelData, Transform parent);

@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using CodeBase.Data;
-using CodeBase.Infrastructure.AssetManagement;
+﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Infrastructure.States;
-using CodeBase.Logic;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Device;
 using CodeBase.StaticData.Levels;
@@ -18,7 +15,7 @@ namespace CodeBase.UI.Services.Factory
 {
     public class UIFactory : IUIFactory
     {
-        public Transform UIRoot;
+        private Transform _uiRoot;
         
         private readonly IAssetProvider _assetProvider;
         private readonly IStaticDataService _staticData;
@@ -37,49 +34,33 @@ namespace CodeBase.UI.Services.Factory
         }
 
         public void CreateUIRoot() =>
-            UIRoot = _assetProvider.Instantiate(AssetPath.UIRootPath).transform;
+            _uiRoot = _assetProvider.Instantiate<Transform>(AssetPath.UIRootPath);
 
         public void CreateMenuWindow(IWindowService windowService)
         {
-            WindowConfig config = _staticData.ForWindow(WindowId.Menu);
-            WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
-            window.Construct(_progressService, _stateMachine, this, _saveLoadProgressService);
+            WindowBase window = CreateWindow(WindowId.Menu);
 
             foreach (OpenWindowButton button in window.GetComponentsInChildren<OpenWindowButton>())
                 button.Construct(windowService);
         }
 
-        public void CreateInProgressWindow()
-        {
-            WindowConfig config = _staticData.ForWindow(WindowId.InProgress);
-            WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
-            
-            window.Construct(_progressService, _stateMachine, this, _saveLoadProgressService);
-        }
-
         public void CreateGameplayWindow(LevelStaticData levelData, IWindowService windowService)
         {
             WindowConfig config = _staticData.ForWindow(WindowId.Gameplay);
-            GameplayWindow window = Object.Instantiate(config.Prefab, UIRoot).GetComponent<GameplayWindow>();
+            GameplayWindow window = Object.Instantiate(config.Prefab, _uiRoot).GetComponent<GameplayWindow>();
             
             window.Construct(_progressService, _stateMachine, this, _saveLoadProgressService, windowService);
             window.Initialize(levelData);
         }
 
-        public void CreateWinWindow()
+        public WindowBase CreateWindow(WindowId windowId)
         {
-            WindowConfig config = _staticData.ForWindow(WindowId.WinWindow);
-            WinWindow window = Object.Instantiate(config.Prefab, UIRoot).GetComponent<WinWindow>();
+            WindowConfig config = _staticData.ForWindow(windowId);
+            WindowBase window = Object.Instantiate(config.Prefab, _uiRoot);
             
             window.Construct(_progressService, _stateMachine, this, _saveLoadProgressService);
-        }
 
-        public void CreateLoseWindow()
-        {
-            WindowConfig config = _staticData.ForWindow(WindowId.LoseWindow);
-            WindowBase window = Object.Instantiate(config.Prefab, UIRoot);
-            
-            window.Construct(_progressService, _stateMachine, this, _saveLoadProgressService);
+            return window;
         }
 
         public void CreateDeviceSpawners(LevelStaticData levelData, Transform parent)
