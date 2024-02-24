@@ -36,14 +36,15 @@ namespace CodeBase.Infrastructure.States
                 _saveLoadProgressService.LoadProgress() 
                 ?? NewProgress();
             
-            Debug.Log($"Progress = {_progressService.Progress.GameData.MaxLevel} {_progressService.Progress.GameData.Level}");
+            Debug.Log($"Progress = {_progressService.Progress.GameData.MaxLevel} {_progressService.Progress.GameData.CurrentLevel}");
         }
 
         private PlayerProgress NewProgress()
         {
             PlayerProgress playerProgress = new PlayerProgress();
             playerProgress.GameData.MaxLevel = 17;
-            playerProgress.GameData.Level = 1;
+            playerProgress.GameData.CompletedLevel = 0;
+            playerProgress.GameData.CurrentLevel = 1;
             return playerProgress;
         }
     }

@@ -1,10 +1,14 @@
-﻿using CodeBase.Logic;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CodeBase.Logic;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Device;
 using CodeBase.StaticData.Levels;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using static CodeBase.Infrastructure.AssetManagement.TagsConstants;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -48,6 +52,7 @@ namespace CodeBase.Infrastructure.States
       LevelStaticData levelData = LevelStaticData();
 
       InitUIRoot();
+      HideTechnicalObjects();
       InitGameplayWindow(levelData);
     }
 
@@ -56,6 +61,12 @@ namespace CodeBase.Infrastructure.States
 
     private void InitUIRoot() => 
       _uiFactory.CreateUIRoot();
+
+    private void HideTechnicalObjects()
+    {
+        List<GameObject> techObjects = GameObject.FindGameObjectsWithTag(tag: Tech).ToList();
+        techObjects.ForEach(techObject => techObject.SetActive(false));
+    }
 
     private void InitGameplayWindow(LevelStaticData levelData) => 
       _uiFactory.CreateGameplayWindow(levelData, _windowService);
