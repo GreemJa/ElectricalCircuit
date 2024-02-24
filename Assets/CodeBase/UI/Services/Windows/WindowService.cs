@@ -21,14 +21,8 @@ namespace CodeBase.UI.Services.Windows
                 case WindowId.Menu:
                     _uiFactory.CreateMenuWindow(this);
                     break;
-                case WindowId.InProgress:
-                    _uiFactory.CreateInProgressWindow();
-                    break;
-                case WindowId.WinWindow:
-                    _uiFactory.CreateWinWindow();
-                    break;
-                case WindowId.LoseWindow:
-                    _uiFactory.CreateLoseWindow();
+                default:
+                    _uiFactory.CreateWindow(windowId);
                     break;
             }
         }
