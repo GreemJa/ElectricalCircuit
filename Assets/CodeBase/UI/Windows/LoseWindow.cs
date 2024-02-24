@@ -11,7 +11,7 @@ namespace CodeBase.UI.Windows
         {
             base.Initialize();
 
-            RestartButton.onClick.AddListener(()=>_gameStateMachine.Enter<LoadLevelState,string>($"Level {_progressService.Progress.GameData.Level}"));
+            RestartButton.onClick.AddListener(()=>_gameStateMachine.Enter<LoadLevelState,string>($"Level {_progressService.Progress.GameData.CurrentLevel}"));
         }
     }
 }

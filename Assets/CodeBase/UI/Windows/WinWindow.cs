@@ -16,10 +16,10 @@ namespace CodeBase.UI.Windows
         {
             base.Initialize();
 
-            LevelNumberText.text = LevelNumberTextOutline.text = $"{_progressService.Progress.GameData.Level}";
+            LevelNumberText.text = LevelNumberTextOutline.text = $"{_progressService.Progress.GameData.CurrentLevel}";
             _progressService.Progress.GameData.ExtendLevel();
             _saveLoadProgressService.SaveProgress();
-            ContinueButton.onClick.AddListener(()=>_gameStateMachine.Enter<LoadLevelState,string>($"Level {_progressService.Progress.GameData.Level}"));
+            ContinueButton.onClick.AddListener(()=>_gameStateMachine.Enter<LoadLevelState,string>($"Level {_progressService.Progress.GameData.CurrentLevel}"));
         }
     }
 }

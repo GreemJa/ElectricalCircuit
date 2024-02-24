@@ -18,14 +18,13 @@ namespace CodeBase.UI.Windows
 
         private void OnCleanBtn()
         {
-            _progressService.Progress.GameData.Level = 1;
-            _progressService.Progress.GameData.MaxLevel = 17;
+            _progressService.Progress.GameData.CurrentLevel = 1;
             _saveLoadProgressService.SaveProgress();
         }
 
         private void OnPlayBtn()
         {
-            _gameStateMachine.Enter<LoadLevelState, string>($"Level {_progressService.Progress.GameData.Level}");
+            _gameStateMachine.Enter<LoadLevelState, string>($"Level {_progressService.Progress.GameData.CurrentLevel}");
         }
     }
 }
