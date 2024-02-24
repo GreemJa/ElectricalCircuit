@@ -1,19 +1,22 @@
 using System;
+using UnityEngine.Serialization;
 
 namespace CodeBase.Data
 {
     [Serializable]
     public class GameData
     {
-        public int Level;
+        public int CurrentLevel;
+        public int CompletedLevel;
         public int MaxLevel;
 
         public void ExtendLevel()
         {
-            if (Level + 1 > MaxLevel) 
+            if (CurrentLevel + 1 > MaxLevel) 
                 return;
 
-            Level++;
+            CurrentLevel++;
+            CompletedLevel = CompletedLevel+1 < CurrentLevel ? CompletedLevel++ : CompletedLevel;
         }
     }
 }
